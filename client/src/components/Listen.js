@@ -26,7 +26,7 @@ const Listen = ({ disable, startListening, stopListening, isListening }) => {
     if (isListening === false && listen === true) {
       setListen(false);
     }
-  }, [isListening]);
+  }, [isListening, listen]);
 
   useEffect(() => {
     if (listen) {
@@ -36,7 +36,7 @@ const Listen = ({ disable, startListening, stopListening, isListening }) => {
         stopListening();
       }
     }
-  }, [listen]);
+  }, [isListening, listen, startListening, stopListening]);
 
   const toggleListen = () => {
     setListen(!listen);
