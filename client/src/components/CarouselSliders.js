@@ -92,7 +92,7 @@ const CarouselSliders = (props) => {
                     .scrollIntoView({ behavior: "smooth" });
                   setActiveVideoID(match.YouTubeID);
                 }}
-              ></a>
+              > </a>
             );
           })}
         </div>
