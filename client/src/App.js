@@ -40,6 +40,7 @@ function App() {
     streamRef.current = stream;
   }, [stream]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (isPhone) {
       setAudioInput("mic");
@@ -74,7 +75,7 @@ function App() {
     socket.on("totalSongs", (songsCount) => {
       setTotalSongs(songsCount);
     });
-  }, []);
+  },);
 
   useEffect(() => {
     const emitTotalSongs = () => {
@@ -86,12 +87,12 @@ function App() {
     return () => clearInterval(intervalId);
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     (async () => {
       try {
         const go = new window.Go();
         const result = await WebAssembly.instantiateStreaming(
-          fetch("/main.wasm"), 
+          fetch("/main.wasm"),
           go.importObject
         );
         go.run(result.instance);
@@ -201,7 +202,7 @@ function App() {
           const audioContext = new AudioContext();
           const arrayBufferCopy = arrayBuffer.slice(0);
           const audioBufferDecoded = await audioContext.decodeAudioData(arrayBufferCopy);
-          
+
           const audioData = audioBufferDecoded.getChannelData(0);
           const audioArray = Array.from(audioData);
 
@@ -248,18 +249,6 @@ function App() {
       console.error("error:", error);
       cleanUp();
     }
-  }
-
-
-
-  function downloadRecording(blob) {
-    const blobUrl = URL.createObjectURL(blob);
-
-    const downloadLink = document.createElement("a");
-    downloadLink.href = blobUrl;
-    downloadLink.download = "recorded_audio.wav";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
   }
 
   function cleanUp() {

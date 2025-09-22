@@ -41,13 +41,13 @@ const AnimatedNumber = ({
         onStart();
       }, delayTime);
     }
-  }, [onStarted]);
+  }, [delay, onStart, onStarted]);
 
   React.useEffect(() => {
     if (onFinished && onFinish) {
       onFinish();
     }
-  }, [onFinished]);
+  }, [onFinish, onFinished]);
 
   if (includeComma) {
     const reducedArray = new Array(
@@ -58,9 +58,10 @@ const AnimatedNumber = ({
       Math.ceil(prevNumberString.length / 3)
     ).fill(0);
 
+    // eslint-disable-next-line array-callback-return
     reducedArray.map((__, index) => {
       if (index === 0) {
-        return;
+        return [];
       }
 
       animateToNumbersArr.splice(
@@ -70,9 +71,10 @@ const AnimatedNumber = ({
       );
     });
 
+    // eslint-disable-next-line array-callback-return
     startReducedArray.map((__, index) => {
       if (index === 0) {
-        return;
+        return [];
       }
 
       prevNumbersArr.splice(prevNumberString.length - index * 3, 0, ",");
